@@ -103,6 +103,8 @@ CREATE TABLE user_follows_user (
     PRIMARY KEY (follower_id, following_id)
 );
 
+CREATE INDEX idx_user_followers ON user_follows_user(following_id);
+
 CREATE TABLE user_visits_spots (
     spot_id UUID REFERENCES spot(id) ON DELETE CASCADE,
     user_id UUID REFERENCES user(id) ON DELETE CASCADE,
