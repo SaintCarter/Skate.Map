@@ -72,6 +72,13 @@ CREATE TABLE post (
     media_type TEXT NOT NULL,
     posted_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
+
+-- Index for organizing posts by user_id in descending order of post_time
+CREATE INDEX idx_post_user_id_posted_at ON post (user_id, posted_at DESC);
+
+-- Index for organizing posts by spot_id in descending order of post_time
+CREATE INDEX idx_post_spot_id_posted_at ON post (spot_id, posted_at DESC);
+
 -- =================================================================================== --
 -- USER INTERACTIONS
 -- =================================================================================== --
