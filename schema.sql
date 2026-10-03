@@ -100,8 +100,5 @@ CREATE TABLE user_visits_spot (
     spot_id UUID REFERENCES spot(id) ON DELETE CASCADE,
     user_id UUID REFERENCES user(id) ON DELETE CASCADE,
     visited_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    PRIMARY KEY (spot_id, user_id)
+    PRIMARY KEY (user_id, spot_id)
 );
-
--- Index to organize user_visits_spot by user_id
-CREATE INDEX idx_user_spot ON user_visits_spot(user_id);
