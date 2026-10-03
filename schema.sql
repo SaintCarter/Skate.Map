@@ -93,8 +93,8 @@ CREATE TABLE user_follows_user (
     PRIMARY KEY (follower_id, following_id)
 );
 
--- Index to organize user_visits_spot by user_id
-CREATE INDEX idx_user_spot ON user_visits_spot(user_id, spot_id);
+-- Index to count followers for a given user
+CREATE INDEX idx_user_followers ON user_follows_user(following_id);
 
 CREATE TABLE user_visits_spot (
     spot_id UUID REFERENCES spot(id) ON DELETE CASCADE,
@@ -102,3 +102,6 @@ CREATE TABLE user_visits_spot (
     visited_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     PRIMARY KEY (spot_id, user_id)
 );
+
+-- Index to organize user_visits_spot by user_id
+CREATE INDEX idx_user_spot ON user_visits_spot(user_id);
