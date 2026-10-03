@@ -75,6 +75,13 @@ CREATE TABLE post (
     media_thumbnail_url TEXT NOT NULL,
     posted_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
+
+-- Index for organizing posts by user_id in descending order of post_time
+CREATE INDEX idx_post_user_id_posted_at ON post (user_id, posted_at DESC);
+
+-- Index for organizing posts by spot_id in descending order of post_time
+CREATE INDEX idx_post_spot_id_posted_at ON post (spot_id, posted_at DESC);
+
 -- =================================================================================== --
 -- USER INTERACTIONS
 -- =================================================================================== --
@@ -96,9 +103,9 @@ CREATE TABLE user_follows_user (
     PRIMARY KEY (follower_id, following_id)
 );
 
-CREATE TABLE user_visits_spot (
+CREATE TABLE user_visits_spots (
     spot_id UUID REFERENCES spot(id) ON DELETE CASCADE,
     user_id UUID REFERENCES user(id) ON DELETE CASCADE,
     visited_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    PRIMARY KEY (spot_id, user_id)
+    PRIMARY KEY (user_id, spot_id)
 );
